@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Court Case Status</title>
+</head>
+<body>
+    <h1>Check Filing Status</h1>
+
+    {% if captcha_image %}
+        <form method="POST">
+            <label for="section">Section:</label>
+            <select name="section" id="section" required>
+                <option value="">Choose section</option>
+                <option value="1">JUDICIAL SECTION</option>
+                <option value="4">CRIMINAL SIDE</option>
+            </select><br><br>
+
+            <label for="from_date">Filing Date (YYYY-MM-DD):</label>
+            <input type="text" name="from_date" id="from_date" placeholder="YYYY-MM-DD" required><br><br>
+
+            <img src="data:image/png;base64,{{ captcha_image }}" alt="Captcha"><br>
+            <label for="captcha">Enter Captcha:</label>
+            <input type="text" name="captcha" id="captcha" required><br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+
+    {% elif result %}
+        <h2>Result:</h2>
+        <pre>{{ result }}</pre>
+        <a href="/">Try Again</a>
+
+    {% else %}
+        <p>Loading...</p>
+    {% endif %}
+</body>
+</html>
